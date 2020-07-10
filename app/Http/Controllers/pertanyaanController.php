@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pertanyaan;
+use App\Tag;
 
 class pertanyaanController extends Controller
 {
@@ -14,6 +16,10 @@ class pertanyaanController extends Controller
     public function index()
     {
         //
+        $pertanyaan=Pertanyaan::join('pertanyaan_tag','pertanyaan.id','=','pertanyaan_tag.pertanyaan_id')
+            ->join('tag','pertanyaan_tag.tag_id','=','tag.id')
+            ->select('pertanyaan.*','tag.tag')->get();
+        return view('pages/pertanyaan',compact('pertanyaan'));
     }
 
     /**
@@ -34,7 +40,30 @@ class pertanyaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*
+        $new_pertanyaan=new Pertanyaan;
+        $new_pertanyaan->judul=$request["judul"];
+        $new_pertanyaan->isi=$request["isi"];
+        $new_pertanyaan->user_id=1000000;//dummy
+        $new_pertanyaan->save();
+        dd($new_pertanyaan);
+        */
+        $new_pertanyaan=Pertanyaan::create([
+            "judul"=>$request["judul"],
+            "isi"=>$request["isi"],
+            "user_id"=>1000000,//dummy
+        ]);
+        $tagarray=explode(',',$request["tag"]);
+        $tagsmulti=[];
+        foreach($tagarray as $strtag){
+            $tagassc["tag"]=$strtag;
+            $tagsmulti[]=$tagassc;
+        }
+        foreach($tagsmulti as $tagcheck){
+            $tag=Tag::firstOrCreate($tagcheck);
+            $new_pertanyaan->tags()->attach($tag->id);
+        }
+        return redirect('pertanyaan');
     }
 
     /**
