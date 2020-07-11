@@ -6,7 +6,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            <div class="sidebar-brand-text mx-3">Stackoverflow <sup></sup></div>
         </a>
 
         <!-- Divider -->
@@ -20,19 +20,32 @@
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider">
+    
+      <!-- <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>PUBLIC</span>
+            </a>
+            <hr>
+      </li> -->
          <li class="nav-item active">
+            <font color="white"><b>&nbsp;PUBLIC</b></font>
+            <hr class="sidebar-divider">
             <a class="nav-link" href="{{route('pertanyaan.create')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Pertanyaan</span></a>
+            <a class="nav-link" href="">
+            <i>&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            <span>Tags</span></a>
+            <a class="nav-link" href="">
+            <i>&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            <span>Users</span></a>
         </li>
               
 
         
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Interface
-        </div>
+        
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
@@ -54,15 +67,13 @@
         <hr class="sidebar-divider">
 
         <!-- Heading -->
-        <div class="sidebar-heading">
-            Addons
-        </div>
+        
 
         
         <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
+        <!-- <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+        </div> -->
 
         </ul>
         <!-- End of Sidebar -->
