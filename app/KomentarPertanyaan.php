@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class KomentarPertanyaan extends Model
 {
-    protected $table="komentarpertanyaan";
+    protected $table="komentar_pertanyaan";
     protected $guarded=[];
 }

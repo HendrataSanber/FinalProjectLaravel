@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pertanyaan;
+use App\KomentarPertanyaan;
 use App\Jawaban;
+use App\KomentarJawaban;
 use App\Tag;
 
 class pertanyaanController extends Controller
@@ -76,13 +78,22 @@ class pertanyaanController extends Controller
      */
     public function show($id)
     {
-        $pertanyaan=Pertanyaan::select('*')
-            ->where('id','=',$id)
-            ->get();
+        $pertanyaan=Pertanyaan::join('pertanyaan_tag','pertanyaan.id','=','pertanyaan_tag.pertanyaan_id')
+            ->join('tag','pertanyaan_tag.tag_id','=','tag.id')
+            ->where('pertanyaan.id','=',$id)
+            ->select('pertanyaan.*','tag.tag')->get();
         $jawaban=Jawaban::select('*')
             ->where('pertanyaan_id','=',$id)
             ->get();
-        return view('pages.show',compact('pertanyaan','jawaban'));
+        foreach($jawaban as $key=>$item){
+            $jid=$item["id"];
+            $kompj=KomentarJawaban::select('*')
+            ->where('jawaban_id','=',$jid)
+            ->get();
+        }
+        $komp=KomentarPertanyaan::where('pertanyaan_id','=',$id)
+            ->select('*')->get();
+        return view('pages.show',compact('pertanyaan','jawaban','komp'));
     }
 
     /**

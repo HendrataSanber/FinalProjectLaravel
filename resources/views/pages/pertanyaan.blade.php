@@ -42,10 +42,7 @@
                         <span class="text">{{ $item->tag }}</span>
                     </a>
                     </div>
-                    <a href="">Submit Komentar</a>
-                    <a href="/pertanyaan/{{ $item->id}}/">Submit Jawaban</a>
                     </div>
-            </div>
             @empty
                  <div class="card shadow m-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
