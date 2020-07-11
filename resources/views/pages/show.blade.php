@@ -29,11 +29,11 @@
                 <span class="text">{{ $pertanyaan[0]->tag }}</span>
             </a>
         </div>
-        @foreach($komp as $item)
+        @foreach($pertanyaan[0]->komentar as $item)
         <div class="card">
             <blockquote class="blockquote mb-0">
-                {{$item->isi}}
-            <footer class="blockquote-footer">{{$item->created_at}}</footer>
+                {{$item["isi"]}}
+            <footer class="blockquote-footer">{{$item["time"]}}</footer>
             </blockquote>
         </div>
         @endforeach
@@ -60,6 +60,14 @@
             <?php echo htmlspecialchars_decode($item->isi); ?>
             <br>
         </div>
+        @foreach($item->komentar as $item2)
+        <div class="card">
+            <blockquote class="blockquote mb-0">
+                {{$item2["isi"]}}
+            <footer class="blockquote-footer">{{$item2["time"]}}</footer>
+            </blockquote>
+        </div>
+        @endforeach
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse{{$item->id}}" aria-expanded="false" aria-controls="collapseExample">
             Click to add comment
         </button>

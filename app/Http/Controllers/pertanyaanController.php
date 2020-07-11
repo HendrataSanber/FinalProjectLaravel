@@ -89,19 +89,33 @@ class pertanyaanController extends Controller
         $pertanyaan=Pertanyaan::join('pertanyaan_tag','pertanyaan.id','=','pertanyaan_tag.pertanyaan_id')
             ->join('tag','pertanyaan_tag.tag_id','=','tag.id')
             ->where('pertanyaan.id','=',$id)
-            ->select('pertanyaan.*','tag.tag')->get();
+            ->select('pertanyaan.*','tag.tag')
+            ->limit(1)
+            ->get();
+        $komp=KomentarPertanyaan::where('pertanyaan_id','=',$id)
+            ->select('*')->get();
+        $komentar=array();
+        foreach($komp as $item){
+            array_push($komentar,["isi"=>$item->isi,"time"=>$item->updated_at]);
+        }
+        $pertanyaan[0]["komentar"]=$komentar;
+
         $jawaban=Jawaban::select('*')
             ->where('pertanyaan_id','=',$id)
             ->get();
-        foreach($jawaban as $key=>$item){
+        foreach($jawaban as $item){
             $jid=$item["id"];
-            $kompj=KomentarJawaban::select('*')
+            $komj=KomentarJawaban::select('*')
             ->where('jawaban_id','=',$jid)
             ->get();
+            //kumpulkan jadi 1 dlm bntk array
+            $komentar=array();
+            foreach($komj as $item2){
+                array_push($komentar,["isi"=>$item2->isi,"time"=>$item2->updated_at]);
+            }
+            $item["komentar"]=$komentar;
         }
-        $komp=KomentarPertanyaan::where('pertanyaan_id','=',$id)
-            ->select('*')->get();
-        return view('pages.show',compact('pertanyaan','jawaban','komp'));
+        return view('pages.show',compact('pertanyaan','jawaban'));
     }
 
     /**
