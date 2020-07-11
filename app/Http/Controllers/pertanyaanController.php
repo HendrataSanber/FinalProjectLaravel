@@ -63,6 +63,7 @@ class pertanyaanController extends Controller
             $tag=Tag::firstOrCreate($tagcheck);
             $new_pertanyaan->tags()->attach($tag->id);
         }
+
         return redirect('pertanyaan');
     }
 
