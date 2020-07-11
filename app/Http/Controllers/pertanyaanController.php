@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
+
+
 use Illuminate\Http\Request;
 use App\Pertanyaan;
 use App\KomentarPertanyaan;
@@ -51,6 +54,11 @@ class pertanyaanController extends Controller
         $new_pertanyaan->save();
         dd($new_pertanyaan);
         */
+        $request->validate([
+            'judul' => 'required',
+            'isi' => 'required',
+            'tag'=>'required' 
+        ]);
         $new_pertanyaan=Pertanyaan::create([
             "judul"=>$request["judul"],
             "isi"=>$request["isi"],
