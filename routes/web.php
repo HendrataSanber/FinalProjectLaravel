@@ -15,3 +15,6 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 Route::resource('pertanyaan','pertanyaanController');
+
+//Route::post('jawaban/{id}/store','jawabanController@store');
+Route::resource('jawaban','jawabanController');

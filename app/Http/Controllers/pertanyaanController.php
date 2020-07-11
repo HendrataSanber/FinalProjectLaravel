@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pertanyaan;
+use App\Jawaban;
 use App\Tag;
 
 class pertanyaanController extends Controller
@@ -75,7 +76,13 @@ class pertanyaanController extends Controller
      */
     public function show($id)
     {
-        //
+        $pertanyaan=Pertanyaan::select('*')
+            ->where('id','=',$id)
+            ->get();
+        $jawaban=Jawaban::select('*')
+            ->where('pertanyaan_id','=',$id)
+            ->get();
+        return view('pages.show',compact('pertanyaan','jawaban'));
     }
 
     /**
