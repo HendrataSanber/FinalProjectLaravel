@@ -29,12 +29,15 @@
                 <span class="text">{{ $pertanyaan[0]->tag }}</span>
             </a>
         </div>
+        <hr>
         @foreach($pertanyaan[0]->komentar as $item)
-        <div class="card">
-            <blockquote class="blockquote mb-0">
-                {{$item["isi"]}}
-            <footer class="blockquote-footer">{{$item["time"]}}</footer>
+        
+        <div class="card shadow ml-3 mr-3 my-1 border-left-info w-50">
+            
+            <blockquote class="blockquote pt-1 pl-3 text-info">&quot;
+                {{$item["isi"]}} &quot;
             </blockquote>
+            <h6 class="pl-3 pr-3 pt-0 align-self-end">{{$item["time"]}}</h6>
         </div>
         @endforeach
 
@@ -60,15 +63,18 @@
             <?php echo htmlspecialchars_decode($item->isi); ?>
             <br>
         </div>
+        <hr>
         @foreach($item->komentar as $item2)
-        <div class="card">
-            <blockquote class="blockquote mb-0">
-                {{$item2["isi"]}}
-            <footer class="blockquote-footer">{{$item2["time"]}}</footer>
+         <div class="card shadow ml-3 mr-3 my-1 border-left-info w-50">
+            
+            <blockquote class="blockquote pt-1 pl-3 text-info">&quot;
+                {{$item2["isi"]}} &quot;
             </blockquote>
+            <h6 class="pl-3 pr-3 pt-0 align-self-end">{{$item2["time"]}}</h6>
         </div>
+        
         @endforeach
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse{{$item->id}}" aria-expanded="false" aria-controls="collapseExample">
+        <button class="btn btn-primary px-3" type="button" data-toggle="collapse" data-target="#collapse{{$item->id}}" aria-expanded="false" aria-controls="collapseExample">
             Click to add comment
         </button>
 
