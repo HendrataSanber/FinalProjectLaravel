@@ -13,9 +13,15 @@ use App\KomentarJawaban;
 use App\Tag;
 use App\VotePertanyaan;
 use App\VoteJawaban;
+use Auth;
 
 class pertanyaanController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +30,24 @@ class pertanyaanController extends Controller
     public function index()
     {
         //
+        /*
         $pertanyaan=Pertanyaan::join('pertanyaan_tag','pertanyaan.id','=','pertanyaan_tag.pertanyaan_id')
             ->join('tag','pertanyaan_tag.tag_id','=','tag.id')
             ->select('pertanyaan.*','tag.tag')->get();
+        */
+        $pertanyaan=Pertanyaan::select('*')->get();
+        foreach($pertanyaan as $item){
+            $id=$item["id"];
+                $tag=Pertanyaan::join('pertanyaan_tag','pertanyaan.id','=','pertanyaan_tag.pertanyaan_id')
+                ->join('tag','pertanyaan_tag.tag_id','=','tag.id')
+                ->where('pertanyaan.id','=',$item->id)
+                ->select('tag.tag')->get();
+            $taglist=array();
+            foreach($tag as $tag2){
+                array_push($taglist,$tag2->tag);
+            }
+            $item["tag"]=$taglist;
+        }
         return view('pages/pertanyaan',compact('pertanyaan'));
     }
 
@@ -64,7 +85,7 @@ class pertanyaanController extends Controller
         $new_pertanyaan=Pertanyaan::create([
             "judul"=>$request["judul"],
             "isi"=>$request["isi"],
-            "user_id"=>1000000,//dummy
+            "user_id"=>Auth::Id(),//dummy
         ]);
         $tagarray=explode(',',$request["tag"]);
         $tagsmulti=[];
@@ -104,7 +125,7 @@ class pertanyaanController extends Controller
         $totalvote=VotePertanyaan::where('pertanyaan_id','=',$id)
             ->sum('count');
         $pertanyaan[0]["totalvote"]=$totalvote;
-        $currentvote=VotePertanyaan::where(['pertanyaan_id'=>$id,'user_id'=>1000000])
+        $currentvote=VotePertanyaan::where(['pertanyaan_id'=>$id,'user_id'=>Auth::Id()])
         ->select('count')->get();
         if(isset($currentvote[0])){
             $pertanyaan[0]["currentvote"]=$currentvote[0]["count"];
@@ -130,7 +151,7 @@ class pertanyaanController extends Controller
             $totalvote=VoteJawaban::where('jawaban_id','=',$item->id)
             ->sum('count');
             $item["totalvote"]=$totalvote;
-            $currentvote=VoteJawaban::where(['jawaban_id' => $item->id,'user_id'=>1000000])
+            $currentvote=VoteJawaban::where(['jawaban_id' => $item->id,'user_id'=>Auth::Id()])
             ->select('count')->get();
             if(isset($currentvote[0])){
                 $item["currentvote"]=$currentvote[0]["count"];

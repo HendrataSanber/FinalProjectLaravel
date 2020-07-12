@@ -144,15 +144,16 @@
         </div>
     </div>
     @endforeach
+    <div class="container">
     <form action="/jawaban" method="POST">
     @csrf
     <div class="card shadow m-5 p-2">
-        <h6>Jawaban baru</h6>
+        <h3>Jawaban baru</h3>
         <textarea class=" ckeditor mx-5"name="isi" placeHolder="Masukkan jawaban baru di sini"></textarea>
         <input type="hidden" name="pertanyaan_id" value="{{$pertanyaan[0]['id']}}">
         <div class="d-block text-center pt-2">        <input  class=" btn btn-success d-flex"type="submit">    
 </div>
     </div>
-     
     </form>
+    </div>
 @endsection

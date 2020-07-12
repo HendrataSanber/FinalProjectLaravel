@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\KomentarPertanyaan;
+use Auth;
 
 class KomentarPertanyaanController extends Controller
 {
@@ -39,7 +40,7 @@ class KomentarPertanyaanController extends Controller
         //
         $new_komen=KomentarPertanyaan::create([
             "isi"=>$request["isi"],
-            "user_id"=>1000000,//dummy
+            "user_id"=>Auth::Id(),//dummy
             "pertanyaan_id"=>$request["id"],
         ]);
         return redirect('pertanyaan/'.$request["id"]);

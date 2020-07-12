@@ -11,6 +11,8 @@
 
     <title>SB Admin 2 - Dashboard</title>
         @include('includes.style')
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
 
     <body id="page-top">
@@ -74,11 +76,15 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();
+                ">Logout</a>
             </div>
         </div>
-        </div>
     </div>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
 
     @include('includes.script')
     </body>
