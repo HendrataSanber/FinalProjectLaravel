@@ -16,7 +16,7 @@ class CreatePertanyaanTagTable extends Migration
         Schema::create('pertanyaan_tag', function (Blueprint $table) {
             $table->unsignedBigInteger('pertanyaan_id');
             $table->unsignedBigInteger('tag_id');
-            $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan');
+            $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan')->onDelete('cascade');
             $table->foreign('tag_id')->references('id')->on('tag');
         });
     }

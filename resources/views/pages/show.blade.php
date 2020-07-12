@@ -39,7 +39,7 @@
                             else if($pertanyaan[0]->currentvote==-1){
                             echo '<h6 class="text-danger"> User ini sudah downvote</h6> ';
                             }else{
-                            echo  '<h6 class="text-warning"> User ini belum upvote</h6>';
+                            echo  '<h6 class="text-warning"> User ini belum vote</h6>';
                             }
                         ?>
                         </div>

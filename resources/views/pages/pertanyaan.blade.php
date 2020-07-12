@@ -42,6 +42,23 @@
                         </a>
                         @endforeach
                 </div>
+                <form action="/pertanyaan/{{ $item->id}}/edit" method="GET">
+                  @csrf
+                  <button type="submit" class="btn btn-success">Edit</button>
+                  </form>
+                <form action="/pertanyaan/{{ $item->id}}" method="POST">
+                  @csrf
+                  @method("DELETE")
+                  <button type="submit" class="btn btn-danger" onclick="
+                  var yakin = confirm('Apakah kamu yakin akan menghapus pertanyaan ini?');
+                  if (yakin) {
+                      
+                  }
+                  else{
+                    return false;
+                  }
+                  ">Delete</button>
+                  </form>
               </div>
             @endforeach
         </div>

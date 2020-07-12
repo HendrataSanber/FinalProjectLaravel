@@ -172,6 +172,13 @@ class pertanyaanController extends Controller
     public function edit($id)
     {
         //
+        $pertanyaan=Pertanyaan::join('pertanyaan_tag','pertanyaan.id','=','pertanyaan_tag.pertanyaan_id')
+            ->join('tag','pertanyaan_tag.tag_id','=','tag.id')
+            ->where('pertanyaan.id','=',$id)
+            ->select('pertanyaan.*','tag.tag')
+            ->limit(1)
+            ->first();
+        return view('pages.editPertanyaan',compact('pertanyaan'));
     }
 
     /**
@@ -183,7 +190,13 @@ class pertanyaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd($id);
+        $updated=Pertanyaan::where('id','=',$id)
+            ->update([
+                'judul'=>$request['judul'],
+                'isi'=>$request['isi'],
+            ]);
+        return redirect('pertanyaan');
     }
 
     /**
@@ -194,6 +207,8 @@ class pertanyaanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted=Pertanyaan::where('id','=',$id)
+            ->delete();
+        return redirect('pertanyaan');
     }
 }
