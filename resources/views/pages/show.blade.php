@@ -29,6 +29,26 @@
                 <span class="text">{{ $pertanyaan[0]->tag }}</span>
             </a>
         </div>
+        <div>
+            Total poin:{{$pertanyaan[0]->totalvote}}
+        </div>
+        <?php
+            if($pertanyaan[0]->currentvote==10){
+                echo "User ini sudah upvote";
+            }
+            else if($pertanyaan[0]->currentvote==-1){
+                echo "User ini sudah downvote";
+            }
+            else{
+                echo "User ini belum vote";
+            }
+        ?>
+        <a href="/upvotep/{{$pertanyaan[0]->id}}">
+                Up
+        </a>
+        <a href="/downvotep/{{$pertanyaan[0]->id}}">
+                Down
+        </a>
         <hr>
         @foreach($pertanyaan[0]->komentar as $item)
         
@@ -59,11 +79,32 @@
     @foreach($jawaban as $item)
     <div class="card shadow m-4">
         <div class="card-body mt-2">
-            <h6 class="mb-4">{{ $pertanyaan[0]->created_at }}</h6>
+            <h6 class="mb-4">{{ $item->created_at }}</h6>
             <?php echo htmlspecialchars_decode($item->isi); ?>
             <br>
         </div>
         <hr>
+        <div>
+            Total poin:{{$item->totalvote}}
+            <br>
+            <?php
+                if($item->currentvote==10){
+                    echo "User ini sudah upvote";
+                }
+                else if($item->currentvote==-1){
+                    echo "User ini sudah downvote";
+                }
+                else{
+                    echo "User ini belum vote";
+                }
+            ?>
+        </div>
+        <a href="/upvotej/{{$item->id}}/{{$pertanyaan[0]->id}}">
+                Up
+        </a>
+        <a href="/downvotej/{{$item->id}}/{{$pertanyaan[0]->id}}">
+                Down
+        </a>
         @foreach($item->komentar as $item2)
          <div class="card shadow ml-3 mr-3 my-1 border-left-info w-50">
             

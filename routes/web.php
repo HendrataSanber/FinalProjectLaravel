@@ -22,3 +22,7 @@ Route::resource('jawaban','jawabanController');
 Route::resource('komentarpertanyaan','KomentarPertanyaanController');
 Route::resource('komentarjawaban','KomentarJawabanController');
 //Route::post('jawaban/{id}/store','jawabanController@store');
+Route::get('upvotep/{id}','VoteController@uppertanyaan');
+Route::get('downvotep/{id}','VoteController@downpertanyaan');
+Route::get('upvotej/{id}/{pid}','VoteController@upjawaban');
+Route::get('downvotej/{id}/{pid}','VoteController@downjawaban');

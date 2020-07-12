@@ -11,6 +11,8 @@ use App\KomentarPertanyaan;
 use App\Jawaban;
 use App\KomentarJawaban;
 use App\Tag;
+use App\VotePertanyaan;
+use App\VoteJawaban;
 
 class pertanyaanController extends Controller
 {
@@ -99,6 +101,17 @@ class pertanyaanController extends Controller
             array_push($komentar,["isi"=>$item->isi,"time"=>$item->updated_at]);
         }
         $pertanyaan[0]["komentar"]=$komentar;
+        $totalvote=VotePertanyaan::where('pertanyaan_id','=',$id)
+            ->sum('count');
+        $pertanyaan[0]["totalvote"]=$totalvote;
+        $currentvote=VotePertanyaan::where(['pertanyaan_id'=>$id,'user_id'=>1000000])
+        ->select('count')->get();
+        if(isset($currentvote[0])){
+            $pertanyaan[0]["currentvote"]=$currentvote[0]["count"];
+        }
+        else{
+            $pertanyaan[0]["currentvote"]=0;
+        }
 
         $jawaban=Jawaban::select('*')
             ->where('pertanyaan_id','=',$id)
@@ -114,6 +127,17 @@ class pertanyaanController extends Controller
                 array_push($komentar,["isi"=>$item2->isi,"time"=>$item2->updated_at]);
             }
             $item["komentar"]=$komentar;
+            $totalvote=VoteJawaban::where('jawaban_id','=',$item->id)
+            ->sum('count');
+            $item["totalvote"]=$totalvote;
+            $currentvote=VoteJawaban::where(['jawaban_id' => $item->id,'user_id'=>1000000])
+            ->select('count')->get();
+            if(isset($currentvote[0])){
+                $item["currentvote"]=$currentvote[0]["count"];
+            }
+            else{
+                $item["currentvote"]=0;
+            }
         }
         return view('pages.show',compact('pertanyaan','jawaban'));
     }
