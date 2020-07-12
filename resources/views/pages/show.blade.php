@@ -132,12 +132,14 @@
         </div>
     </div>
     @endforeach
-    <h1>Form kosong untuk jawaban baru disini:</h1><br>
+    <div class="container">
+    <h1>Tambahkan jawaban:</h1><br>
     <form action="/jawaban" method="POST">
     @csrf
-        <textarea name="isi" placeHolder="isi disini"></textarea>
+        <textarea name="isi" placeHolder="isi disini" rows=5 cols=100></textarea>
         <br>
         <input type="hidden" name="pertanyaan_id" value="{{$pertanyaan[0]['id']}}">
-        <input type="submit">
+        <input type="submit" class="btn btn-sm btn-info">
     </form>
+    </div>
 @endsection

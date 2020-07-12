@@ -14,7 +14,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="{{route('pertanyaan.create')}}">
+            <a class="nav-link" href="{{route('pertanyaan.index')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Home</span></a>
         </li>
@@ -31,7 +31,7 @@
          <li class="nav-item active">
             <font color="white"><b>&nbsp;PUBLIC</b></font>
             <hr class="sidebar-divider">
-            <a class="nav-link" href="{{route('pertanyaan.create')}}">
+            <a class="nav-link" href="{{route('pertanyaan.index')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Pertanyaan</span></a>
             <a class="nav-link" href="">

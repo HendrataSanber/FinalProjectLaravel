@@ -33,12 +33,14 @@
                      <h6 class="mb-4">{{ $item->created_at }}</h6>
                         <h6>{{ $item->isi }}</h6>
                                          <br>
+                        @foreach ($item["tag"] as $tag)
                         <a href="#" class="btn btn-info btn-icon-split mt-5">
                             <span class="icon text-white-50">
                             <i class="fas fa-info-circle"></i>
                             </span>
-                            <span class="text">{{ $item->tag }}</span>
+                                <span class="text">{{ $tag }}</span>
                         </a>
+                        @endforeach
                 </div>
               </div>
             @endforeach

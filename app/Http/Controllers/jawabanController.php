@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pertanyaan;
 use App\Jawaban;
+use Auth;
 
 class jawabanController extends Controller
 {
@@ -36,7 +37,7 @@ class jawabanController extends Controller
     public function store(Request $request)
     {
         $data=$request->all();
-        $data["user_id"]=1000000;
+        $data["user_id"]=Auth::Id();
         $data["chosen"]=false;
         $new_jawaban=Jawaban::create($data);
         return redirect('pertanyaan/'.$data["pertanyaan_id"]);

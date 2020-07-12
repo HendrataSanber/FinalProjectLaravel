@@ -13,7 +13,8 @@
 
 Route::get('/', function () {
 //    return view('layouts.app');
-return redirect('pertanyaan');
+return view('welcome');
+//return redirect('pertanyaan');
 });
 Route::resource('pertanyaan','pertanyaanController');
 
@@ -26,3 +27,14 @@ Route::get('upvotep/{id}','VoteController@uppertanyaan');
 Route::get('downvotep/{id}','VoteController@downpertanyaan');
 Route::get('upvotej/{id}/{pid}','VoteController@upjawaban');
 Route::get('downvotej/{id}/{pid}','VoteController@downjawaban');
+Route::get('login.html',function(){
+    return view('welcome');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
